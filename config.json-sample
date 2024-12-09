@@ -1,0 +1,10 @@
+{
+	"REDIS_HOST":"localhost",
+	"REDIS_PORT":"6379",
+	"REDIS_DB":"0",
+	"REDIS_PASSWORD":"",
+	"IDS_TO_PROCESS":"ids_to_process",
+	"IDS_PROCESSED":"ids_processed",
+	"TINYDB_FILE":"video_metadata.json",
+	"OUTPUT_DIR":"output_metadata"
+}
