@@ -84,6 +84,7 @@ while True:
             # Insert metadata into TinyDB
             video_table.upsert(metadata_video, where('id') == video_id)
             logging.info(f"Processed and stored metadata for video ID {video_id}.")
+            redis_client.delete(metadata_key)
         except json.JSONDecodeError as e:
             logging.warning("Failed to decode metadata for video ID %s: %s", video_id, e)
     else:
