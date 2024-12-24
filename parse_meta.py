@@ -33,8 +33,8 @@ try:
     redis_client = redis.StrictRedis(
         host=REDIS_HOST,
         port=REDIS_PORT,
-        db=REDIS_DB,
         password=REDIS_PASSWORD,
+        db=REDIS_DB,
         decode_responses=True  # Automatically decode bytes to str
     )
     logging.info("Connected to Redis server.")
