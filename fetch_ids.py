@@ -10,11 +10,11 @@ import json
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
-REDIS_HOST = config['REDIS_HOST']
-REDIS_PORT = config['REDIS_PORT']
-REDIS_DB = config['REDIS_DB']
-REDIS_PASSWORD = config['REDIS_PASSWORD']
-IDS_TO_PROCESS = config['IDS_TO_PROCESS']
+REDIS_HOST = config.get('REDIS_HOST','localhost')
+REDIS_PORT = config.get('REDIS_PORT',6379)
+REDIS_DB = config.get('REDIS_DB',0)
+REDIS_PASSWORD = config.get('REDIS_PASSWORD',None)
+IDS_TO_PROCESS = config.get('IDS_TO_PROCESS','ids_to_process')
 
 # Set the log file name to the script's filename with .log extension
 LOG_FILE = os.path.splitext(os.path.basename(__file__))[0] + ".log"
@@ -25,11 +25,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0",
 ]
 
-# Initialize Redis connection
-if REDIS_PASSWORD:
-    redis_client = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB, password=REDIS_PASSWORD)
-else:
-    redis_client = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+redis_client = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB, password=REDIS_PASSWORD)
 
 def random_delay(min_seconds=1.5, max_seconds=5.0):
     delay = random.uniform(min_seconds, max_seconds)

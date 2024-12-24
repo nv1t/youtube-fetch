@@ -6,11 +6,10 @@ import sys
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
-# Redis configuration
-REDIS_HOST = config['REDIS_HOST']
-REDIS_PORT = config['REDIS_PORT']
-REDIS_DB = config['REDIS_DB']
-REDIS_PASSWORD = config['REDIS_PASSWORD']
+REDIS_HOST = config.get('REDIS_HOST','localhost')
+REDIS_PORT = config.get('REDIS_PORT',6379)
+REDIS_DB = config.get('REDIS_DB',0)
+REDIS_PASSWORD = config.get('REDIS_PASSWORD',None)
 
 # Connect to Redis
 redis_client = redis.StrictRedis(
